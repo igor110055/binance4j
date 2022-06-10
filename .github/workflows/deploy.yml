@@ -11,7 +11,7 @@ env:
   OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SERVERS: '[{  "id": "ossrh",  "username": "${{ env.OSSRH_USERNAME }}",   "password": "${{ env.OSSRH_PASSWORD }}"}]'
+  SERVERS: '[{  "id": "ossrh",  "username": "${{ secrets.OSSRH_USERNAME }}",   "password": "${{ secrets.OSSRH_PASSWORD }}"}]'
 jobs:
   deploy-core:
     runs-on: ubuntu-latest
