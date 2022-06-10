@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: deploy
+      - name: java config
         uses: actions/setup-java@v2
         with:
           java-version: 8
@@ -29,34 +29,11 @@ jobs:
         uses: s4u/maven-settings-action@v2.6.0
         with:
           servers: '[{  "id": "ossrh",  "username": "${{ env.OSSRH_USERNAME }}",   "password": "${{ env.OSSRH_PASSWORD }}"}]'
-      - run: cd binance4j-core && mvn -DskipTests=true deploy
+      - name: test
+        run: cd binance4j-core && mvn test
+      - name: deploy
+        run: mvn -DskipTests=true deploy
       - name: Sleep for 15m
         uses: juliangruber/sleep-action@v1
         with:
           time: 15m
-  deploy-market:
-    needs: deploy-core
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v1
-      - name: configure settings
-        uses: s4u/maven-settings-action@v2.6.0
-        with:
-          servers: |
-            [
-              {
-                "id": "ossrh",
-                "username": "${{ env.OSSRH_USERNAME }}", 
-                "password": "${{ env.OSSRH_PASSWORD }}"
-              }
-            ]
-      - name: deploy
-        uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-market && mvn deploy
