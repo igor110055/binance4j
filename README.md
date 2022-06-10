@@ -1,9 +1,6 @@
-<section style="
-  display: flex;
-  align-items: center;
-  justify-content: center;">
+<p align="center">
   <img src="./static/img/logo/logo-256_x_256.png" />
-</Section>
+</p>
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.binance4j/binance4j-core/badge.svg)](https://search.maven.org/search?q=com.binance4j)
 [![Sonatype Nexus](https://img.shields.io/nexus/r/com.binance4j/binance4j-core?server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/#nexus-search;quick~com.binance4j)
