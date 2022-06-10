@@ -17,7 +17,7 @@
 
   <name>binance4j-core</name>
   <description>The core package of the binance4j project</description>
-  <url>https://github.com/binance4j/binance4j-core</url>
+  <url>https://github.com/binance4j/binance4j</url>
 
   <licenses>
     <license>
@@ -48,7 +48,7 @@
   </developers>
 
   <scm>
-    <url>https://github.com/binance4j/binance4j-core.git</url>
+    <url>https://github.com/binance4j/binance4j.git</url>
   </scm>
 
   <dependencies>

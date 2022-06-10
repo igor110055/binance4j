@@ -11,6 +11,7 @@ env:
   OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SERVERS: '[{  "id": "ossrh",  "username": "${{ env.OSSRH_USERNAME }}",   "password": "${{ env.OSSRH_PASSWORD }}"}]'
 jobs:
   deploy-core:
     runs-on: ubuntu-latest
@@ -18,22 +19,180 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: java setup
+      - name: Java Setup
         uses: actions/setup-java@v2
         with:
           java-version: 8
           distribution: 'adopt'
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v1
-      - name: configure settings
+      - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: '[{  "id": "ossrh",  "username": "${{ env.OSSRH_USERNAME }}",   "password": "${{ env.OSSRH_PASSWORD }}"}]'
-      - name: test
+          servers: SERVERS
+      - name: Test
         run: cd binance4j-core && mvn test
-      - name: deploy
+      - name: Deploy
         run: cd binance4j-core && mvn -DskipTests=true deploy
       - name: Sleep for 15m
         uses: juliangruber/sleep-action@v1
         with:
           time: 15m
+  deploy-market:
+    needs: deploy-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Java Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: Configure Settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: SERVERS
+      - name: Test
+        run: cd binance4j-market && mvn test
+      - name: Deploy
+        run: cd binance4j-market && mvn -DskipTests=true deploy
+  deploy-nft:
+    needs: deploy-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Java Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: Configure Settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: SERVERS
+      - name: Test
+        run: cd binance4j-nft && mvn test
+      - name: Deploy
+        run: cd binance4j-nft && mvn -DskipTests=true deploy
+  deploy-spot:
+    needs: deploy-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Java Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: Configure Settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: SERVERS
+      - name: Test
+        run: cd binance4j-spot && mvn test
+      - name: Deploy
+        run: cd binance4j-spot && mvn -DskipTests=true deploy
+  deploy-vision:
+    needs: deploy-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Java Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: Configure Settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: SERVERS
+      - name: Test
+        run: cd binance4j-vision && mvn test
+      - name: Deploy
+        run: cd binance4j-vision && mvn -DskipTests=true deploy
+  deploy-wallet:
+    needs: deploy-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Java Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: Configure Settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: SERVERS
+      - name: Test
+        run: cd binance4j-wallet && mvn test
+      - name: Deploy
+        run: cd binance4j-wallet && mvn -DskipTests=true deploy
+  deploy-websocket:
+    needs: deploy-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Java Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: Configure Settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: SERVERS
+      - name: Test
+        run: cd binance4j-websocket && mvn test
+      - name: Deploy
+        run: cd binance4j-websocket && mvn -DskipTests=true deploy
+      - name: Sleep for 15m
+        uses: juliangruber/sleep-action@v1
+        with:
+          time: 15m
+  deploy-strategy:
+    needs: deploy-websocket
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Java Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: Configure Settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: SERVERS
+      - name: Test
+        run: cd binance4j-strategy && mvn test
+      - name: Deploy
+        run: cd binance4j-strategy && mvn -DskipTests=true deploy
