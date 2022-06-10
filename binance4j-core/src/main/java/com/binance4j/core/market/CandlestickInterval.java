@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * Kline/Candlestick intervals.
- * m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
+ * m : minutes; h : hours; d : days; w : weeks; M : months
  */
 @AllArgsConstructor
 public enum CandlestickInterval {
