@@ -39,7 +39,7 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
+          folder: binance4j-core/target/apidocs
           target-folder: binance4j-core
   deploy-market:
     needs: deploy-core
@@ -70,8 +70,8 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
-          target-folder: binance4j-core
+          folder: binance4j-market/target/apidocs
+          target-folder: binance4j-market
   deploy-nft:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -101,8 +101,8 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
-          target-folder: binance4j-core
+          folder: binance4j-nft/target/apidocs
+          target-folder: binance4j-nft
   deploy-spot:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -132,8 +132,8 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
-          target-folder: binance4j-core
+          folder: binance4j-spot/target/apidocs
+          target-folder: binance4j-spot
   deploy-vision:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -163,8 +163,8 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
-          target-folder: binance4j-core
+          folder: binance4j-vision/target/apidocs
+          target-folder: binance4j-vision
   deploy-wallet:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -194,8 +194,8 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
-          target-folder: binance4j-core
+          folder: binance4j-wallet/target/apidocs
+          target-folder: binance4j-wallet
   deploy-websocket:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -225,8 +225,8 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
-          target-folder: binance4j-core
+          folder: binance4j-websocket/target/apidocs
+          target-folder: binance4j-websocket
   deploy-strategy:
     needs: deploy-websocket
     runs-on: ubuntu-latest
@@ -258,5 +258,5 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: target/apidocs
-          target-folder: binance4j-core
+          folder: binance4j-strategy/target/apidocs
+          target-folder: binance4j-strategy
