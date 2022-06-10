@@ -3,39 +3,32 @@ on:
   push:
     branches:
       - main
+env:
+  BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
+  BINANCE_API_SECRET: ${{ secrets.BINANCE_API_SECRET }}
+  GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+  PASSPHRASE: ${{ secrets.PASSPHRASE }}
+  OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+  OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   deploy-core:
     runs-on: ubuntu-latest
-    env:
-      BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
-      BINANCE_API_SECRET: ${{ secrets.BINANCE_API_SECRET }}
-      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      PASSPHRASE: ${{ secrets.PASSPHRASE }}
-      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v1
-      - name: configure settings
-        uses: s4u/maven-settings-action@v2.6.0
-        with:
-          servers: |
-            [
-              {
-                "id": "ossrh",
-                "username": "${{ env.OSSRH_USERNAME }}", 
-                "password": "${{ env.OSSRH_PASSWORD }}"
-              }
-            ]
       - name: deploy
         uses: actions/setup-java@v2
         with:
           java-version: 8
           distribution: 'adopt'
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: configure settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: '[{  "id": "ossrh",  "username": "${{ env.OSSRH_USERNAME }}",   "password": "${{ env.OSSRH_PASSWORD }}"}]'
       - run: cd binance4j-core && mvn deploy
       - name: Sleep for 15m
         uses: juliangruber/sleep-action@v1
@@ -44,14 +37,6 @@ jobs:
   deploy-market:
     needs: deploy-core
     runs-on: ubuntu-latest
-    env:
-      BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
-      BINANCE_API_SECRET: ${{ secrets.BINANCE_API_SECRET }}
-      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      PASSPHRASE: ${{ secrets.PASSPHRASE }}
-      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
