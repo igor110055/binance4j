@@ -18,7 +18,21 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v2
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: configure settings
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: |
+            [
+              {
+                "id": "ossrh",
+                "username": "${{ env.OSSRH_USERNAME }}", 
+                "password": "${{ env.OSSRH_PASSWORD }}"
+              }
+            ]
+      - name: deploy
+        uses: actions/setup-java@v2
         with:
           java-version: 8
           distribution: 'adopt'
@@ -28,7 +42,6 @@ jobs:
         with:
           time: 15m
   deploy-market:
-    needs: deploy-core
     runs-on: ubuntu-latest
     env:
       BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
@@ -55,12 +68,9 @@ jobs:
                 "password": "${{ env.OSSRH_PASSWORD }}"
               }
             ]
-      - name: Deploy artifact on maven
-        run: cd binance4j-market && mvn --no-transfer-progress --batch-mode -Dgpg.passphrase=${{ env.PASSPHRASE }}  clean deploy
-      - name: Deploy javadoc to gh-pages
-        uses: JamesIves/github-pages-deploy-action@4.1.8
+      - name: deploy
+        uses: actions/setup-java@v2
         with:
-          branch: gh-pages
-          clean: true
-          folder: target/apidocs
-          target-folder: binance4j-market
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-market && mvn deploy
