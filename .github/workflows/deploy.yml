@@ -25,4 +25,81 @@ jobs:
         with:
           java-version: 8
           distribution: 'adopt'
-        run: cd binance4j-core && mvn test
+      - run: cd binance4j-core && mvn test
+  test-market:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-market && mvn test
+  test-nft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-nft && mvn test
+  test-spot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-spot && mvn test
+  test-strategy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-strategy && mvn test
+  test-vision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-vision && mvn test
+  test-wallet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-wallet && mvn test
+  test-websocket:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - run: cd binance4j-websocket && mvn test
