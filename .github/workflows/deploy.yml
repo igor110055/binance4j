@@ -15,7 +15,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  test-core:
+  deploy-core:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,88 +25,37 @@ jobs:
         with:
           java-version: 8
           distribution: 'adopt'
-      - run: cd binance4j-core && mvn test
-        
-  test-market:
+      - run: cd binance4j-core && mvn deploy
+      - name: Sleep for 15m
+        uses: juliangruber/sleep-action@v1
+        with:
+          time: 15m
+  deploy-market:
+    needs: deploy-core
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v2
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v1
+      - name: configure settings
+        uses: s4u/maven-settings-action@v2.6.0
         with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-market && mvn test
-        
-  test-nft:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+          servers: |
+            [
+              {
+                "id": "ossrh",
+                "username": "${{ env.OSSRH_USERNAME }}", 
+                "password": "${{ env.OSSRH_PASSWORD }}"
+              }
+            ]
+      - name: Deploy artifact on maven
+        run: cd binance4j-market && mvn --no-transfer-progress --batch-mode -Dgpg.passphrase=${{ env.PASSPHRASE }}  clean deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
         with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-nft && mvn test
-        
-  test-spot:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-spot && mvn test
-        
-  test-strategy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-strategy && mvn test
-        
-  test-vision:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-vision && mvn test
-        
-  test-wallet:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-wallet && mvn test
-        
-  test-websocket:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v2
-        with:
-          java-version: 8
-          distribution: 'adopt'
-      - run: cd binance4j-websocket && mvn test
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-market
