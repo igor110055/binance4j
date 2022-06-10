@@ -34,6 +34,13 @@ jobs:
         run: cd binance4j-core && mvn test
       - name: Deploy
         run: cd binance4j-core && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
       - name: Sleep for 15m
         uses: juliangruber/sleep-action@v1
         with:
@@ -55,11 +62,18 @@ jobs:
       - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: SERVERS
+          servers: ${{ env.SERVERS }}
       - name: Test
         run: cd binance4j-market && mvn test
       - name: Deploy
         run: cd binance4j-market && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
   deploy-nft:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -77,11 +91,18 @@ jobs:
       - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: SERVERS
+          servers: ${{ env.SERVERS }}
       - name: Test
         run: cd binance4j-nft && mvn test
       - name: Deploy
         run: cd binance4j-nft && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
   deploy-spot:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -99,11 +120,18 @@ jobs:
       - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: SERVERS
+          servers: ${{ env.SERVERS }}
       - name: Test
         run: cd binance4j-spot && mvn test
       - name: Deploy
         run: cd binance4j-spot && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
   deploy-vision:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -121,11 +149,18 @@ jobs:
       - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: SERVERS
+          servers: ${{ env.SERVERS }}
       - name: Test
         run: cd binance4j-vision && mvn test
       - name: Deploy
         run: cd binance4j-vision && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
   deploy-wallet:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -143,11 +178,18 @@ jobs:
       - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: SERVERS
+          servers: ${{ env.SERVERS }}
       - name: Test
         run: cd binance4j-wallet && mvn test
       - name: Deploy
         run: cd binance4j-wallet && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
   deploy-websocket:
     needs: deploy-core
     runs-on: ubuntu-latest
@@ -165,11 +207,18 @@ jobs:
       - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: SERVERS
+          servers: ${{ env.SERVERS }}
       - name: Test
         run: cd binance4j-websocket && mvn test
       - name: Deploy
         run: cd binance4j-websocket && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
       - name: Sleep for 15m
         uses: juliangruber/sleep-action@v1
         with:
@@ -191,8 +240,15 @@ jobs:
       - name: Configure Settings
         uses: s4u/maven-settings-action@v2.6.0
         with:
-          servers: SERVERS
+          servers: ${{ env.SERVERS }}
       - name: Test
         run: cd binance4j-strategy && mvn test
       - name: Deploy
         run: cd binance4j-strategy && mvn -DskipTests=true deploy
+      - name: Deploy javadoc to gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages
+          clean: true
+          folder: target/apidocs
+          target-folder: binance4j-core
