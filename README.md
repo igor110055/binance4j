@@ -169,97 +169,6 @@
 </dependency>
 ```
 
-<!-- binance4j-strategy -->
-
-<!-- title -->
-<h1 align="center">
-	binance4j-strategy
-</h1>
-
-<!-- logo -->
-<p align="center">
-	<img src="./static/img/repos/strategy.svg" width="128" height="128" />
-</p>
-
-<!-- badges -->
-<p align="center">
-	<a href="https://binance4j.github.io/binance4j-strategy">
-		<img src="https://img.shields.io/badge/javadoc-latest-informational" alt="Javadoc"/>
-	</a>
-</p>
-
-<h2 align="center">
-	Technical analysis for the binance4j ecosystem
-</h2>
-
-## Features
-
-- Create trading strategies
-- Analyse strategy with ta4j
-- Backtest strategy with external klines/bar series or Binance public klines with binance4j-vision
-- Live trade on Binance streams with binance4j-websocket
-- Live trade on multiple symbols
-
-## Installation
-
-### Maven
-
-```xml
-<dependency>
-  <groupId>com.binance4j</groupId>
-  <artifactId>binance4j-strategy</artifactId>
-  <version>1.7.3</version>
-</dependency>
-```
-
-<!-- binance4j-vision -->
-
-<!-- title -->
-<h1 align="center">
-	binance4j-vision
-</h1>
-
-<!-- logo -->
-<p align="center">
-	<img src="./static/img/repos/vision.svg" width="128" height="128" />
-</p>
-
-<!-- badges -->
-<p align="center">
-	<a href="https://binance4j.github.io/binance4j-vision">
-		<img src="https://img.shields.io/badge/javadoc-latest-informational" alt="Javadoc"/>
-	</a>
-</p>
-
-<h2 align="center">
-	Connector for the public data endpoints
-</h2>
-
-## Features
-
-### SPOT
-
-- Get historical daily/monthly klines
-- Get historical daily/monthly trades
-- Get historical daily/monthly aggregate trades
-
-### FUTURES
-
-coming soon
-
-## Installation
-
-### Maven
-
-```xml
-<dependency>
-  <groupId>com.binance4j</groupId>
-  <artifactId>binance4j-vision</artifactId>
-  <version>1.7.3</version>
-</dependency>
-```
-
-
 <!-- binance4j-wallet -->
 
 <!-- title -->
@@ -366,6 +275,95 @@ coming soon
 </dependency>
 ```
 
+<!-- binance4j-vision -->
+
+<!-- title -->
+<h1 align="center">
+	binance4j-vision
+</h1>
+
+<!-- logo -->
+<p align="center">
+	<img src="./static/img/repos/vision.svg" width="128" height="128" />
+</p>
+
+<!-- badges -->
+<p align="center">
+	<a href="https://binance4j.github.io/binance4j-vision">
+		<img src="https://img.shields.io/badge/javadoc-latest-informational" alt="Javadoc"/>
+	</a>
+</p>
+
+<h2 align="center">
+	Connector for the public data endpoints
+</h2>
+
+## Features
+
+### SPOT
+
+- Get historical daily/monthly klines
+- Get historical daily/monthly trades
+- Get historical daily/monthly aggregate trades
+
+### FUTURES
+
+coming soon
+
+## Installation
+
+### Maven
+
+```xml
+<dependency>
+  <groupId>com.binance4j</groupId>
+  <artifactId>binance4j-vision</artifactId>
+  <version>1.7.3</version>
+</dependency>
+```
+
+<!-- binance4j-strategy -->
+
+<!-- title -->
+<h1 align="center">
+	binance4j-strategy
+</h1>
+
+<!-- logo -->
+<p align="center">
+	<img src="./static/img/repos/strategy.svg" width="128" height="128" />
+</p>
+
+<!-- badges -->
+<p align="center">
+	<a href="https://binance4j.github.io/binance4j-strategy">
+		<img src="https://img.shields.io/badge/javadoc-latest-informational" alt="Javadoc"/>
+	</a>
+</p>
+
+<h2 align="center">
+	Technical analysis for the binance4j ecosystem
+</h2>
+
+## Features
+
+- Create trading strategies
+- Analyse strategy with ta4j
+- Backtest strategy with external klines/bar series or Binance public klines with binance4j-vision
+- Live trade on Binance streams with binance4j-websocket
+- Live trade on multiple symbols
+
+## Installation
+
+### Maven
+
+```xml
+<dependency>
+  <groupId>com.binance4j</groupId>
+  <artifactId>binance4j-strategy</artifactId>
+  <version>1.7.3</version>
+</dependency>
+```
 
 <!-- binance4j-core -->
 
