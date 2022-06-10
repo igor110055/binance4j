@@ -62,7 +62,6 @@
             <version>2.13.3</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- Automatically delomboks the source code -->
@@ -101,8 +100,7 @@
                         <!-- generates the sources jar from the delombok directory -->
                         <configuration>
                             <target>
-                                <jar destfile="${project.build.directory}/${project.build.finalName}-sources.jar"
-                                     basedir="${project.build.directory}/delombok"/>
+                                <jar destfile="${project.build.directory}/${project.build.finalName}-sources.jar" basedir="${project.build.directory}/delombok" />
                             </target>
                         </configuration>
                     </execution>
@@ -180,7 +178,7 @@
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
-                        <phase>install</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>sign</goal>
                         </goals>
@@ -193,12 +191,20 @@
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.6.12</version>
                 <extensions>true</extensions>
-
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>

@@ -217,7 +217,7 @@
         <executions>
           <execution>
             <id>sign-artifacts</id>
-            <phase>install</phase>
+            <phase>deploy</phase>
             <goals>
               <goal>sign</goal>
             </goals>
@@ -235,6 +235,15 @@
           <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
+        <executions>
+          <execution>
+            <id>default-deploy</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
     <pluginManagement>
